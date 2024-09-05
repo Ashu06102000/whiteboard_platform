@@ -1,3 +1,4 @@
+import { Open_Sans, Roboto } from "next/font/google";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -63,6 +64,9 @@ const config: Config = {
       },
       fontFamily: {
         Newsreader: ["newsreader", "sans-serif"],
+        Lato: ["lato", "sans-serif"],
+        Open_Sans: ["open_sans", "sans-serif"],
+        Roboto: ["roboto", "sans-serif"],
       },
     },
   },

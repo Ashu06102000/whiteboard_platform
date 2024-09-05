@@ -51,7 +51,7 @@ const Loading = () => {
       </motion.div>
 
       <motion.div
-        className="absolute bottom-10 font-Newsreader italic left-10 text-8xl	 font-semibold text-gray-500"
+        className="absolute bottom-10 font-Newsreader italic left-10 text-9xl	 font-semibold text-gray-500"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
