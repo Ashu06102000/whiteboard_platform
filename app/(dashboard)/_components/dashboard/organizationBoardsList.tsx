@@ -15,7 +15,7 @@ import { Label } from "@/components/ui/label";
 import { api } from "@/convex/_generated/api";
 import { useOrganization } from "@clerk/nextjs";
 import { useMutation, useQuery } from "convex/react";
-import { CircuitBoard } from "lucide-react";
+import { CircuitBoard, EllipsisVertical } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -66,28 +66,33 @@ const organizationBoardsList = ({ org_id }: { org_id: string }) => {
       <div className="bg-white rounded-lg p-3 flex gap-3">
         {" "}
         {boardsData?.map((data: any) => {
-          console.log(data, "data");
           return (
             <>
-              <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-                <DialogTrigger asChild onClick={() => setBoardId(data._id)}>
-                  <div
-                    key={data.orgId}
-                    className="flex flex-col gap-0  cursor-pointer max-w-52"
-                  >
-                    <div className="bg-antiqeWhite h-44 w-52 rounded-t-md cursor-pointer border-gray-400 border-b-0 border flex items-center justify-center">
-                      <Image
-                        src={data.imageUrl}
-                        width={30}
-                        height={30}
-                        alt="image"
+              <Dialog>
+                <div
+                  key={data.orgId}
+                  className="flex flex-col gap-0  cursor-pointer max-w-52"
+                >
+                  <div className="bg-antiqeWhite h-44 w-52 rounded-t-md cursor-pointer border-gray-400 border-b-0 border flex items-center justify-center relative">
+                    <DialogTrigger asChild onClick={() => setBoardId(data._id)}>
+                      <EllipsisVertical
+                        className="absolute top-1 right-1"
+                        onClick={() => setDialogOpen(true)}
+                        color="black"
                       />
-                    </div>
-                    <div className="text-xs text-start px-4 bg-white py-4 rounded-b-md border-gray-400 border">
-                      {data.title}
-                    </div>
+                    </DialogTrigger>
+                    <Image
+                      src={data.imageUrl}
+                      width={30}
+                      height={30}
+                      alt="image"
+                    />
                   </div>
-                </DialogTrigger>
+                  <div className="text-xs text-start px-4 bg-white py-4 rounded-b-md border-gray-400 border">
+                    {data.title}
+                  </div>
+                </div>
+
                 {data._id === boardId && (
                   <DialogContent className="sm:max-w-[425px]">
                     <DialogHeader>
