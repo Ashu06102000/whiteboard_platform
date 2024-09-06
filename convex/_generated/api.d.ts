@@ -13,7 +13,8 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
-import type * as board from "../board.js";
+import type * as mutations_board from "../mutations/board.js";
+import type * as queries_boards from "../queries/boards.js";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -24,7 +25,8 @@ import type * as board from "../board.js";
  * ```
  */
 declare const fullApi: ApiFromModules<{
-  board: typeof board;
+  "mutations/board": typeof mutations_board;
+  "queries/boards": typeof queries_boards;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,

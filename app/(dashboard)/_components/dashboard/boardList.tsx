@@ -1,8 +1,12 @@
 "use client";
 
-import EmptyBoards from "./emptyBoards";
+import CreateBoardSection from "./createBaordSection";
 import EmptyFavorite from "./emptyFavorites";
 import EmptySearch from "./emptySearch";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { CircuitBoard } from "lucide-react";
+import OrganizationBoardsList from "./organizationBoardsList";
 
 const BoardsList = ({
   org_id,
@@ -15,19 +19,18 @@ const BoardsList = ({
     recent?: string;
   };
 }) => {
-  const Querydata = [];
-  if (!Querydata.length && query.search) {
+  const boardsData = useQuery(api.queries.boards.getBoards, { orgId: org_id });
+
+  if (!boardsData?.length && query.search) {
     return <EmptySearch />;
   }
-  if (!Querydata.length && query.search) {
+  if (!boardsData?.length && query.search) {
     return <EmptyFavorite />;
   }
-  if (!Querydata.length) {
-    return <EmptyBoards />;
-  }
+
   return (
     <div>
-      <div>{JSON.stringify(query)}</div>
+      <OrganizationBoardsList org_id={org_id} />
     </div>
   );
 };
