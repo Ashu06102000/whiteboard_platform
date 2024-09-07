@@ -20,7 +20,7 @@ const OrganizationSidebar = () => {
   const recent = params.get("recent");
 
   return (
-    <div className="hidden lg:flex flex-col h-screen spacr-y-6 w-52 p-5 pt-5 gap-6 ">
+    <div className="hidden lg:flex flex-col h-screen spacr-y-6 max-w-[200px] w-full p-2 pt-5 gap-6 ">
       <Link href={"/"} className="flex items-start gap-2">
         <div className="flex flex-col gap-1">
           <h1

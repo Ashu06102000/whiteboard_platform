@@ -40,7 +40,6 @@ const CreateBoardSection = ({ org_id }: { org_id: string }) => {
         title: boardName,
         image: boardimage,
       }).then((res) => {
-        console.log(res, "res");
         return { name: "Board" };
       });
 
@@ -89,7 +88,7 @@ const CreateBoardSection = ({ org_id }: { org_id: string }) => {
                     </Label>
                     <Input
                       id="name"
-                      defaultValue="Pedro Duarte"
+                      defaultValue="Untitled"
                       className="col-span-3"
                       onChange={(e) => setBoardName(e.target.value)}
                     />
@@ -106,7 +105,6 @@ const CreateBoardSection = ({ org_id }: { org_id: string }) => {
                         const file = e?.target?.files[0];
                         if (file) {
                           setBoardImage(URL.createObjectURL(file));
-                          console.log(boardimage);
                         }
                       }}
                     />

@@ -9,7 +9,7 @@ const DashboardLayout = ({ children }: ChildrenProp) => {
       <div className="flex">
         <div className="h-full flex-1">
           <div className="flex gap-x-3 h-full">
-            {/* <Sidebar /> */}
+            <Sidebar />
             <OrganizationSidebar />
             <div className="h-full flex-1">
               <Navbar />

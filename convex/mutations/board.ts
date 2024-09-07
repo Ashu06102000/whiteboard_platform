@@ -20,6 +20,7 @@ export const createMutation = mutation({
       authorId: userIdentity.subject,
       authorName: userIdentity.name!,
       imageUrl: args.image,
+      updatedAt: Date.now(),
     });
     return boards;
   },
@@ -28,8 +29,8 @@ export const createMutation = mutation({
 export const updateMutation = mutation({
   args: {
     id: v.id("boards"),
-    title: v.string(),
-    image: v.string(),
+    title: v.optional(v.string()),
+    image: v.optional(v.string()),
   },
   handler: async (ctx: any, args: any) => {
     try {
@@ -39,14 +40,20 @@ export const updateMutation = mutation({
         throw new Error("Unauthorized");
       }
 
-      console.log(`Updating board with id: ${args.id}`);
+      const updateFields: any = {};
+      if (args.title) {
+        updateFields.title = args.title;
+      }
+      if (args.image) {
+        updateFields.imageUrl = args.image;
+      }
+      updateFields.updatedAt = Date.now();
+      if (Object.keys(updateFields).length === 0) {
+        throw new Error("No fields to update");
+      }
 
-      const result = await ctx.db.patch(args.id, {
-        title: args.title,
-        imageUrl: args.image,
-      });
+      const result = await ctx.db.patch(args.id, updateFields);
 
-      console.log("Update result:", result);
       return result;
     } catch (error) {
       console.error("Error in updateMutation:", error);
