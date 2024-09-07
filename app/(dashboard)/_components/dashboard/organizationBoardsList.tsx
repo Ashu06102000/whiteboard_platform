@@ -36,10 +36,11 @@ const OrganizationBoardsList = ({ org_id }: { org_id: string }) => {
   const [boardImage, setBoardImage] = useState("");
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [detailsDialogOpen, setDetailsDialogOpen] = useState(false);
+  const [deleteDialogOpen, setdeleteDialogOpen] = useState(false);
   const [boardId, setBoardId]: any = useState("");
 
   const updateBoard = useMutation(api.mutations.board.updateMutation);
-
+  const deleteBoard = useMutation(api.mutations.board.deleteMutation);
   const handleOnClick = () => {
     if (!organization) {
       return;
@@ -67,6 +68,22 @@ const OrganizationBoardsList = ({ org_id }: { org_id: string }) => {
           return `${data.name} updated successfully!`;
         },
         error: "Something went wrong while updating the board.",
+      }
+    );
+  };
+  const handleDelete = (boardId: string) => {
+    console.log(boardId, "is");
+    toast.promise(
+      deleteBoard({ id: boardId }).then((res) => {
+        return { name: "Board" };
+      }),
+      {
+        loading: "Deleting board...",
+        success: (data) => {
+          setdeleteDialogOpen(false);
+          return `${data.name} deleted successfully!`;
+        },
+        error: "Something went wrong while deleting the board.",
       }
     );
   };
@@ -119,7 +136,13 @@ const OrganizationBoardsList = ({ org_id }: { org_id: string }) => {
                       >
                         <Pencil size={12} /> Edit
                       </MenubarItem>
-                      <MenubarItem className="flex gap-2">
+                      <MenubarItem
+                        onClick={() => {
+                          setBoardId(data._id);
+                          setdeleteDialogOpen(true);
+                        }}
+                        className="flex gap-2"
+                      >
                         <Trash2 size={12} /> Delete
                       </MenubarItem>
 
@@ -227,16 +250,33 @@ const OrganizationBoardsList = ({ org_id }: { org_id: string }) => {
                       </DialogFooter>
                     </DialogContent>
                   </Dialog>
+                  <Dialog
+                    open={deleteDialogOpen}
+                    onOpenChange={setdeleteDialogOpen}
+                  >
+                    <DialogContent className="sm:max-w-[500px] gap-4">
+                      <DialogTitle>
+                        Do you want to delete this board ?
+                      </DialogTitle>
+                      <DialogFooter>
+                        <Button
+                          onClick={() => handleDelete(boardId)}
+                          variant="destructive"
+                        >
+                          Delete
+                        </Button>
+                        <Button onClick={() => setdeleteDialogOpen(false)}>
+                          Close
+                        </Button>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
                 </div>
               )}
             </div>
           ))}
         </div>
       </div>
-
-      {/* Edit Board Dialog */}
-
-      {/* Board Details Dialog */}
     </div>
   );
 };

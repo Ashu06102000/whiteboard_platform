@@ -61,3 +61,31 @@ export const updateMutation = mutation({
     }
   },
 });
+
+export const deleteMutation = mutation({
+  args: {
+    id: v.id("boards"),
+  },
+  handler: async (ctx: any, args: any) => {
+    try {
+      const userIdentity = await ctx.auth.getUserIdentity();
+
+      if (!userIdentity) {
+        throw new Error("Unauthorized");
+      }
+
+      const board = await ctx.db.get(args.id);
+
+      if (board?.authorId !== userIdentity.subject) {
+        throw new Error("Unauthorized to delete this board");
+      }
+
+      await ctx.db.delete(args.id);
+
+      return { deletedId: args.id };
+    } catch (error) {
+      console.error("Error in deleteMutation:", error);
+      throw new Error("Delete failed");
+    }
+  },
+});
