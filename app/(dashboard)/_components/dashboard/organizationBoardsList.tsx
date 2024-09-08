@@ -36,7 +36,6 @@ import {
 import { format } from "date-fns";
 import BoardDetails from "./boardDetails";
 import { useRouter, useSearchParams } from "next/navigation";
-import Link from "next/link";
 
 const OrganizationBoardsList = ({
   org_id,
@@ -157,25 +156,28 @@ const OrganizationBoardsList = ({
 
   const params = useSearchParams();
   const favoriteParams = params.get("favorites");
-  console.log(favoriteParams, "favoriteParams");
+
   return (
     <div className="">
       <div className="flex flex-col gap-2">
-        <h3 className="text-3xl font-Open_Sans sticky-container">
-          {favoriteParams
-            ? "Favorite boards in this team"
-            : "Boards in this team"}
-          <span>
-            <span className="text-gray-600"> - in {organization?.name}</span>
-          </span>
-        </h3>
-        <div className="rounded-lg p-0 flex gap-3 flex-wrap">
+        {boardsData?.length > 0 && (
+          <h3 className="text-3xl font-Open_Sans sticky-container">
+            {favoriteParams
+              ? "Favorite boards in this team"
+              : "Boards in this team"}
+            <span>
+              <span className="text-gray-600"> - in {organization?.name}</span>
+            </span>
+          </h3>
+        )}
+
+        <div className="rounded-lg p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
           {boardsData?.map((data: any) => (
             <div
               key={data._id}
-              className="flex flex-col gap-0 cursor-pointer max-w-56"
+              className="flex flex-col gap-0 cursor-pointer max-w-56 bg-gray-100 border border-gray-300 rounded-lg text-center"
             >
-              <div className="bg-antiqeWhite h-56 w-56 rounded-t-md cursor-pointer border-gray-100 border-b-0 border flex items-center justify-center relative transition-all duration-300 ease-in-out hover:brightness-75 ">
+              <div className="bg-[coral] h-56  rounded-t-md cursor-pointer  border flex items-center justify-center relative transition-all duration-300 ease-in-out hover:brightness-75 ">
                 <Menubar className="absolute top-2 right-1 p-0 m-0 flex cursor-pointer max-w-10 bg-transparent border-none items-center justify-center focus:bg-transparent menu_btn_bg_focus_remove">
                   <MenubarMenu>
                     <MenubarTrigger>

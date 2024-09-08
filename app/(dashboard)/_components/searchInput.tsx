@@ -12,9 +12,6 @@ const SearchInput = () => {
 
   const handleSearch = useCallback(
     debounce((searchValue: string) => {
-      if (!searchValue?.trim()) {
-        return;
-      }
       router.push(`?search=${searchValue}`);
     }, 300),
     []

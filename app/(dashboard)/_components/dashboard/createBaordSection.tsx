@@ -19,13 +19,14 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const CreateBoardSection = ({ org_id }: { org_id: string }) => {
   const { organization } = useOrganization();
 
   const [boardName, setBoardName] = useState("");
   const createBoard = useMutation(api?.mutations.board.createMutation);
-
+  const router = useRouter();
   const [boardimage, setBoardImage] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -39,14 +40,15 @@ const CreateBoardSection = ({ org_id }: { org_id: string }) => {
         orgId: organization.id,
         title: boardName,
         image: boardimage,
-      }).then((res) => {
-        return { name: "Board" };
+      }).then((id) => {
+        return { name: "Board", id: id };
       });
 
     toast.promise(createBoardPromise(), {
       loading: "Creating board...",
       success: (data) => {
         setDialogOpen(false);
+        router.push(`/board/${data.id}`);
         return `${data.name} created successfully!`;
       },
       error: "Something went wrong while creating the board.",
