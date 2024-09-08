@@ -14,7 +14,14 @@ import { Label } from "@/components/ui/label";
 import { api } from "@/convex/_generated/api";
 import { useOrganization } from "@clerk/nextjs";
 import { useMutation, useQuery } from "convex/react";
-import { EllipsisVertical, Info, Pencil, Trash2 } from "lucide-react";
+import {
+  EllipsisVertical,
+  Info,
+  Pencil,
+  SquareArrowOutUpRight,
+  Star,
+  Trash2,
+} from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -28,10 +35,23 @@ import {
 } from "@/components/ui/menubar";
 import { format } from "date-fns";
 import BoardDetails from "./boardDetails";
+import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 
-const OrganizationBoardsList = ({ org_id }: { org_id: string }) => {
-  const boardsData = useQuery(api.queries.boards.getBoards, { orgId: org_id });
+const OrganizationBoardsList = ({
+  org_id,
+  boardsData,
+}: {
+  org_id: string;
+  boardsData: any;
+}) => {
+  const updateBoard = useMutation(api.mutations.board.updateMutation);
+  const deleteBoard = useMutation(api.mutations.board.deleteMutation);
+  const addFavorites = useMutation(api.mutations.board.addFavoriteBoard);
+  const removeFavorite = useMutation(api.mutations.board.unFavoriteBoard);
+
   const { organization } = useOrganization();
+
   const [boardName, setBoardName] = useState("");
   const [boardImage, setBoardImage] = useState("");
   const [editDialogOpen, setEditDialogOpen] = useState(false);
@@ -39,8 +59,8 @@ const OrganizationBoardsList = ({ org_id }: { org_id: string }) => {
   const [deleteDialogOpen, setdeleteDialogOpen] = useState(false);
   const [boardId, setBoardId]: any = useState("");
 
-  const updateBoard = useMutation(api.mutations.board.updateMutation);
-  const deleteBoard = useMutation(api.mutations.board.deleteMutation);
+  const router = useRouter();
+
   const handleOnClick = () => {
     if (!organization) {
       return;
@@ -87,9 +107,43 @@ const OrganizationBoardsList = ({ org_id }: { org_id: string }) => {
       }
     );
   };
+  const handleFavoriteAdd = (boardId: string) => {
+    toast.promise(
+      addFavorites({ id: boardId, orgId: org_id }).then((res) => {
+        console.log(res, "res");
+        return { name: "Board" };
+      }),
+      {
+        loading: "Adding to favorites...",
+        success: (data) => {
+          return toast.success("Board added to favorites successfully");
+        },
+        error: "Something went wrong while adding to favorites.",
+      }
+    );
+  };
+  const handleRemoveFavorite = (boardId: string) => {
+    console.log(boardId, "isFavorite");
+    console.log(org_id, "orgid");
 
-  const copyToClipboard = () => {
-    const currentUrl = window.location.origin + location.pathname;
+    toast.promise(
+      removeFavorite({ id: boardId }).then((res) => {
+        console.log(res, "res");
+        return { name: "Board" };
+      }),
+      {
+        loading: "Removing from favorites...",
+        success: (data) => {
+          return toast.success("Board removed from favorites successfully");
+        },
+        error: "Something went wrong while adding to favorites.",
+      }
+    );
+  };
+
+  const copyToClipboard = (e: any) => {
+    e.preventDefault();
+    const currentUrl = window.location.origin + `/board/${boardId}`;
     console.log(currentUrl);
     navigator.clipboard
       .writeText(currentUrl)
@@ -101,11 +155,16 @@ const OrganizationBoardsList = ({ org_id }: { org_id: string }) => {
       });
   };
 
+  const params = useSearchParams();
+  const favoriteParams = params.get("favorites");
+  console.log(favoriteParams, "favoriteParams");
   return (
     <div className="">
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-2">
         <h3 className="text-3xl font-Open_Sans sticky-container">
-          Boards in this team
+          {favoriteParams
+            ? "Favorite boards in this team"
+            : "Boards in this team"}
           <span>
             <span className="text-gray-600"> - in {organization?.name}</span>
           </span>
@@ -114,21 +173,25 @@ const OrganizationBoardsList = ({ org_id }: { org_id: string }) => {
           {boardsData?.map((data: any) => (
             <div
               key={data._id}
-              className="flex flex-col gap-0 cursor-pointer max-w-52"
+              className="flex flex-col gap-0 cursor-pointer max-w-56"
             >
-              <div className="bg-antiqeWhite h-52 w-52 rounded-t-md cursor-pointer border-gray-100 border-b-0 border flex items-center justify-center relative transition-all duration-300 ease-in-out hover:brightness-75 ">
+              <div className="bg-antiqeWhite h-56 w-56 rounded-t-md cursor-pointer border-gray-100 border-b-0 border flex items-center justify-center relative transition-all duration-300 ease-in-out hover:brightness-75 ">
                 <Menubar className="absolute top-2 right-1 p-0 m-0 flex cursor-pointer max-w-10 bg-transparent border-none items-center justify-center focus:bg-transparent menu_btn_bg_focus_remove">
                   <MenubarMenu>
                     <MenubarTrigger>
                       <EllipsisVertical
                         className="focus:bg-transparent cursor-pointer z-10"
                         color="black"
-                        onClick={() => setBoardId(data._id)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setBoardId(data._id);
+                        }}
                       />
                     </MenubarTrigger>
                     <MenubarContent>
                       <MenubarItem
-                        onClick={() => {
+                        onClick={(e) => {
+                          e.stopPropagation();
                           setBoardId(data._id);
                           setEditDialogOpen(true);
                         }}
@@ -137,7 +200,8 @@ const OrganizationBoardsList = ({ org_id }: { org_id: string }) => {
                         <Pencil size={12} /> Edit
                       </MenubarItem>
                       <MenubarItem
-                        onClick={() => {
+                        onClick={(e) => {
+                          e.stopPropagation();
                           setBoardId(data._id);
                           setdeleteDialogOpen(true);
                         }}
@@ -148,7 +212,8 @@ const OrganizationBoardsList = ({ org_id }: { org_id: string }) => {
 
                       <MenubarSeparator />
                       <MenubarItem
-                        onClick={() => {
+                        onClick={(e) => {
+                          e.stopPropagation();
                           setBoardId(data._id);
                           setDetailsDialogOpen(true);
                         }}
@@ -157,27 +222,52 @@ const OrganizationBoardsList = ({ org_id }: { org_id: string }) => {
                         <Info size={12} /> Board details
                       </MenubarItem>
                       <MenubarItem
-                        onClick={() => {
+                        onClick={(e) => {
+                          e.stopPropagation();
                           setBoardId(data._id);
-                          copyToClipboard();
+                          copyToClipboard(e);
                         }}
                         className="flex gap-2 cursor-pointer"
                       >
                         <Info size={12} /> Copy url
+                      </MenubarItem>
+                      <MenubarItem
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setBoardId(data._id);
+                          window.open(`/boards/${data._id}`, "_blank");
+                        }}
+                        className="flex gap-2 cursor-pointer"
+                      >
+                        <SquareArrowOutUpRight size={12} /> Open in new tab
                       </MenubarItem>
                     </MenubarContent>
                   </MenubarMenu>
                 </Menubar>
 
                 <Image
+                  onClick={() => router.push(`/boards/${data._id}`)}
                   src={data.imageUrl}
                   fill
-                  className="object-cover p-9"
+                  className="object-contain p-9"
                   alt="image"
                 />
               </div>
               <div className="text-sm font-light text-start px-2 bg-white py-2 rounded-b-md border-gray-100 border flex flex-col">
-                {data.title}
+                <div className="flex justify-between items-center">
+                  <span> {data.title}</span>
+                  <Star
+                    onClick={() => {
+                      setBoardId(data._id);
+                      data.isFavorite
+                        ? handleRemoveFavorite(data._id)
+                        : handleFavoriteAdd(data._id);
+                    }}
+                    fill={`${data.isFavorite ? "dodgerblue" : "transparent"}`}
+                    className={`${data.isFavorite ? "stroke-[dodgerblue]" : "stroke-gray-600"}`}
+                    size={16}
+                  />
+                </div>
                 <span className="text-xs font-extralight">
                   Last updated:{" "}
                   {format(new Date(data.updatedAt), "MMM do, yyyy")}

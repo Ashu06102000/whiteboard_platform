@@ -60,8 +60,8 @@ const CreateBoardSection = ({ org_id }: { org_id: string }) => {
         <span className="text-gray-600"> in {organization?.name}</span>
       </h3>
       <div className="flex flex-col gap-2 bg-white rounded-lg p-3">
-        <h4 className="font-normal font-Open_Sans leading-none text-sm text-gray-600">
-          Recommaned boards
+        <h4 className="font-normal font-Open_Sans leading-none text-sm text-gray-500">
+          Recommaned board templates
         </h4>
         <div className="flex gap-2.5 h-full items-center">
           <div className="flex justify-center flex-col gap-2">

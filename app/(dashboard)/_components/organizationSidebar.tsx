@@ -16,7 +16,7 @@ const font = Roboto({
 
 const OrganizationSidebar = () => {
   const params = useSearchParams();
-  const favorite = params.get("favorite");
+  const favorites = params.get("favorites");
   const recent = params.get("recent");
 
   return (
@@ -77,7 +77,7 @@ const OrganizationSidebar = () => {
             className="font-normal"
             href={{
               pathname: "/",
-              query: { recent: true },
+              // query: { recent: true },
             }}
           >
             <Clock4 size={16} />
@@ -85,7 +85,7 @@ const OrganizationSidebar = () => {
           </Link>
         </Button>
         <Button
-          className={`p-0 w-full flex items-center gap-2 h-auto justify-start bg-transparent hover:bg-transparent  ${!favorite && !recent ? "text-blue-600" : "text-gray-600"}`}
+          className={`p-0 w-full flex items-center gap-2 h-auto justify-start bg-transparent hover:bg-transparent  ${!favorites && !recent ? "text-blue-600" : "text-gray-600"}`}
           asChild
           size="lg"
         >
@@ -95,7 +95,7 @@ const OrganizationSidebar = () => {
           </Link>
         </Button>
         <Button
-          className={`p-0 w-full flex items-center gap-2 h-auto justify-start bg-transparent hover:bg-transparent    ${favorite ? "text-blue-600" : "text-gray-600"}`}
+          className={`p-0 w-full flex items-center gap-2 h-auto justify-start bg-transparent hover:bg-transparent    ${favorites ? "text-blue-600" : "text-gray-600"}`}
           asChild
           size="lg"
         >
@@ -103,7 +103,7 @@ const OrganizationSidebar = () => {
             className="font-normal"
             href={{
               pathname: "/",
-              query: { favorite: true },
+              query: { favorites: true },
             }}
           >
             <Star size={16} />

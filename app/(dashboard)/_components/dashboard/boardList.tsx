@@ -19,7 +19,11 @@ const BoardsList = ({
     recent?: string;
   };
 }) => {
-  const boardsData = useQuery(api.queries.boards.getBoards, { orgId: org_id });
+  const boardsData = useQuery(api.queries.boards.getBoards, {
+    orgId: org_id,
+    ...query,
+  });
+  console.log(boardsData, "boardsData");
 
   if (!boardsData?.length && query.search) {
     return <EmptySearch />;
@@ -30,7 +34,7 @@ const BoardsList = ({
 
   return (
     <div>
-      <OrganizationBoardsList org_id={org_id} />
+      <OrganizationBoardsList org_id={org_id} boardsData={boardsData} />
     </div>
   );
 };
