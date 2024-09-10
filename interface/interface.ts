@@ -24,3 +24,13 @@ export interface DashboardPageprops {
     recent?: string;
   };
 }
+
+export interface BoardIdPageProps {
+  params: {
+    boardId: string;
+  };
+}
+
+export interface Canvasprops {
+  boardId: string;
+}

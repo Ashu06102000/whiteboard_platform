@@ -122,12 +122,8 @@ const OrganizationBoardsList = ({
     );
   };
   const handleRemoveFavorite = (boardId: string) => {
-    console.log(boardId, "isFavorite");
-    console.log(org_id, "orgid");
-
     toast.promise(
       removeFavorite({ id: boardId }).then((res) => {
-        console.log(res, "res");
         return { name: "Board" };
       }),
       {
@@ -171,7 +167,7 @@ const OrganizationBoardsList = ({
           </h3>
         )}
 
-        <div className="rounded-lg p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+        <div className="rounded-lg p-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
           {boardsData?.map((data: any) => (
             <div
               key={data._id}
@@ -237,7 +233,7 @@ const OrganizationBoardsList = ({
                         onClick={(e) => {
                           e.stopPropagation();
                           setBoardId(data._id);
-                          window.open(`/boards/${data._id}`, "_blank");
+                          window.open(`/board/${data._id}`, "_blank");
                         }}
                         className="flex gap-2 cursor-pointer"
                       >
@@ -248,7 +244,7 @@ const OrganizationBoardsList = ({
                 </Menubar>
 
                 <Image
-                  onClick={() => router.push(`/boards/${data._id}`)}
+                  onClick={() => router.push(`/board/${data._id}`)}
                   src={data.imageUrl}
                   fill
                   className="object-contain p-9"
