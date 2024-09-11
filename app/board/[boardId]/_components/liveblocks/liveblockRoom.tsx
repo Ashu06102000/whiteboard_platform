@@ -6,6 +6,7 @@ import {
   LiveblocksProvider,
   RoomProvider,
 } from "@liveblocks/react/suspense";
+import Loading from "../loading";
 
 interface LiveblockRoomProps {
   boardId: string;
@@ -18,10 +19,14 @@ const LiveblockRoom: React.FC<LiveblockRoomProps> = ({ boardId, children }) => {
   if (!publicApiKey) {
     return <div>Error: Liveblocks API key is not defined.</div>;
   }
+
   return (
-    <LiveblocksProvider publicApiKey={publicApiKey} authEndpoint={undefined}>
+    <LiveblocksProvider
+      // publicApiKey={publicApiKey}
+      authEndpoint={"/api/liveblocks-auth"}
+    >
       <RoomProvider id={boardId}>
-        <ClientSideSuspense fallback={<div>Loading…</div>}>
+        <ClientSideSuspense fallback={<Loading />}>
           {children}
         </ClientSideSuspense>
       </RoomProvider>

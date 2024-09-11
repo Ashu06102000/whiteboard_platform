@@ -79,3 +79,13 @@ export const getBoardsById = query({
     return board;
   },
 });
+
+export const boards = query({
+  args: {
+    id: v.id("boards"),
+  },
+  handler: async (ctx, args) => {
+    const board = await ctx.db.get(args.id);
+    return board;
+  },
+});
