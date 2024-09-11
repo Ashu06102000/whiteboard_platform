@@ -34,3 +34,7 @@ export interface BoardIdPageProps {
 export interface Canvasprops {
   boardId: string;
 }
+export interface LiveblockRoomProps {
+  boardId: string;
+  children: React.ReactNode;
+}

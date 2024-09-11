@@ -1,5 +1,5 @@
 import { api } from "@/convex/_generated/api";
-import { currentUser } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import { Liveblocks } from "@liveblocks/node";
 import { ConvexHttpClient } from "convex/browser";
 
@@ -12,41 +12,32 @@ const convex = new ConvexHttpClient(
 
 export async function POST(request: Request) {
   const user = await currentUser();
-
+  const authrization = await auth();
   if (!user) {
-    return new Response("Unauthorized", { status: 401 });
+    return new Response("np user");
+  }
+  if (!authrization && !user) {
+    return new Response("Unauthorized", { status: 403 });
   }
 
   const { room } = await request.json();
   const board = await convex.query(api.queries.boards.boards, { id: room });
   const boardId = board?._id;
-  console.log(board, "board");
-  if (!room) {
-    return new Response("Board ID is required", { status: 400 });
+  if (board?.orgId !== authrization.orgId) {
+    return new Response("Unauthorized");
   }
 
   const userInfo = {
-    id: user.id,
     email: user.emailAddresses[0]?.emailAddress ?? "",
     username: user.username,
   };
 
-  // Identify the user in Liveblocks
-  const { status: identifyStatus, body: identifyBody } =
-    await liveblocks.identifyUser(
-      {
-        userId: user.id,
-        groupIds: [],
-      },
-      { userInfo }
-    );
-
-  if (identifyStatus !== 200) {
-    return new Response("Failed to identify user", {
-      status: identifyStatus,
-    });
+  const session = liveblocks.prepareSession(user.id, { userInfo });
+  if (room) {
+    session.allow(room, session.FULL_ACCESS);
   }
-
+  const { status, body } = await session.authorize();
+  return new Response(body, { status });
   const getroom = await liveblocks.getRoom(boardId as string);
   console.log(getroom, "getroom");
   const createRoom = await liveblocks.createRoom(boardId as string, {

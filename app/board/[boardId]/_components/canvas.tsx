@@ -1,6 +1,4 @@
-"use client";
-
-import { Info } from "lucide-react";
+import Info from "./info";
 import Particeipents from "./particepents";
 import Toolbar from "./toolbar";
 import { Canvasprops } from "@/interface/interface";

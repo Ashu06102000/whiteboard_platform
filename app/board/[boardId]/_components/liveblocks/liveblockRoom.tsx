@@ -7,11 +7,7 @@ import {
   RoomProvider,
 } from "@liveblocks/react/suspense";
 import Loading from "../loading";
-
-interface LiveblockRoomProps {
-  boardId: string;
-  children: React.ReactNode;
-}
+import { LiveblockRoomProps } from "@/interface/interface";
 
 const LiveblockRoom: React.FC<LiveblockRoomProps> = ({ boardId, children }) => {
   const publicApiKey = process.env.NEXT_PUBLIC_LIVEBLOCK_API_KEY;
@@ -23,11 +19,11 @@ const LiveblockRoom: React.FC<LiveblockRoomProps> = ({ boardId, children }) => {
   return (
     <LiveblocksProvider
       // publicApiKey={publicApiKey}
-      authEndpoint={"/api/liveblocks-auth"}
+      authEndpoint="/api/liveblocks-auth"
     >
       <RoomProvider id={boardId}>
         <ClientSideSuspense fallback={<Loading />}>
-          {children}
+          {() => children}
         </ClientSideSuspense>
       </RoomProvider>
     </LiveblocksProvider>

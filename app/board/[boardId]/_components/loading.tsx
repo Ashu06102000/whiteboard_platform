@@ -1,4 +1,4 @@
-import { Loader, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import Info from "./info";
 import Particeipents from "./particepents";
 import Toolbar from "./toolbar";

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMutation, useQuery } from "convex/react";
+import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useOrganization } from "@clerk/nextjs";
 
@@ -20,6 +20,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const CreateBoardSection = ({ org_id }: { org_id: string }) => {
   const { organization } = useOrganization();
@@ -121,8 +122,13 @@ const CreateBoardSection = ({ org_id }: { org_id: string }) => {
             </Dialog>
           </div>
           <div className="flex flex-col gap-2  cursor-pointer">
-            <div className="bg-gray-200 w-[162px] h-[114px] rounded-xl cursor-pointer  flex items-center justify-center">
-              <div className="text-xs text-gray-600">coming soon !</div>
+            <div className="bg-gray-200 w-[162px] h-[114px] rounded-xl cursor-pointer  flex items-center justify-center relative">
+              <Image
+                src={"/placeholders/Brainwriting.png"}
+                alt="Brainwriting"
+                fill
+                className="object-contain p-2"
+              />
             </div>
             <div className="text-xs">+ Brainwriting</div>
           </div>
