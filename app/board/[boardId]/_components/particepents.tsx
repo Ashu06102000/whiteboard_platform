@@ -1,9 +1,8 @@
+"use client";
+
 import { Skeleton } from "@/components/ui/skeleton";
-import { activeUsers } from "@/lib/utils";
 
 const Particeipents = ({ boardId }: { boardId: string }) => {
-  const activeParticepents = activeUsers(boardId as string);
-  console.log(activeParticepents, "activeParticepents");
   return (
     <div className="absolute h-12 top-2 right-2 bg-white p-3 rounded-md flex items-center shadow-md">
       particepient
