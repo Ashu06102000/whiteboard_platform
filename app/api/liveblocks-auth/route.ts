@@ -28,8 +28,8 @@ export async function POST(request: Request) {
   }
 
   const userInfo = {
-    email: user.emailAddresses[0]?.emailAddress ?? "",
-    username: user.username,
+    email: user.emailAddresses[0]?.emailAddress ?? "Collaborator",
+    username: user.username || "Collaborator",
   };
 
   const session = liveblocks.prepareSession(user.id, { userInfo });

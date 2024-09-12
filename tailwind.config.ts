@@ -69,6 +69,9 @@ const config: Config = {
         Open_Sans: ["open_sans", "sans-serif"],
         Roboto: ["roboto", "sans-serif"],
       },
+      textColor: {
+        ICcolor: "#5c5fef",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

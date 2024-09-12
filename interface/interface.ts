@@ -1,3 +1,7 @@
+import { Id } from "@/convex/_generated/dataModel";
+import { CanvasState } from "@/types/canvas";
+import { LucideIcon } from "lucide-react";
+
 export interface ChildrenProp {
   children: React.ReactNode;
 }
@@ -32,9 +36,30 @@ export interface BoardIdPageProps {
 }
 
 export interface Canvasprops {
-  boardId: string;
+  boardId: Id<"boards">;
 }
 export interface LiveblockRoomProps {
   boardId: string;
   children: React.ReactNode;
+}
+
+export interface participatantsAvatarProps {
+  email: string;
+  username: string;
+}
+export interface ToolButtonProps {
+  label: string;
+  icon: LucideIcon;
+  onclick: () => void;
+  isActive?: boolean;
+  isDisabled?: boolean;
+}
+
+export interface ToolBarProps {
+  CanvasState: CanvasState;
+  setCanvasState: (newState: CanvasState) => void;
+  undo: () => void;
+  redo: () => void;
+  canUndo: boolean;
+  canRedo: boolean;
 }
