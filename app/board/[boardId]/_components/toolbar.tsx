@@ -22,8 +22,8 @@ const Toolbar = ({
   setCanvasState,
 }: ToolBarProps) => {
   return (
-    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-6">
-      <div className="bg-white rounded-md flex items-center shadow-md gap-4 px-2 py-2">
+    <div className="absolute top-2/4 -translate-y-1/2 left-2 flex flex-col gap-y-4  rounded-md">
+      <div className="bg-white rounded-md flex-col flex items-center shadow-md gap-2 px-2 py-2">
         <Toolbutton
           label={"Select"}
           icon={MousePointer2}
@@ -103,7 +103,7 @@ const Toolbar = ({
           isActive={CanvasState.mode === CanvasMode.pencil}
         />
       </div>
-      <div className="bg-white rounded-md py-4 px-8 flex items-center shadow-md gap-8">
+      <div className="bg-white rounded-md py-4 px-1 flex-col flex items-center shadow-md gap-6">
         <Toolbutton
           label={"Undo"}
           icon={Undo2}

@@ -9,7 +9,7 @@ const Info = ({ boardId }: { boardId: Id<"boards"> }) => {
   const boardData = useQuery(api.queries.boards.getBoardsById, { id: boardId });
   return (
     <div className="absolute top-2 left-2 bg-white rounded-md px-4 h-12 flex items-center shadow-md py-2 gap-2">
-      <h3 className="font-semibold text-xl font-Open_Sans text-ICcolor">
+      <h3 className="font-semibold text-xl font-Open_Sans text-primary">
         IdeaCanvas
       </h3>
       <Separator orientation="vertical" />
