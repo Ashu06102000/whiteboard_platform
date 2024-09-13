@@ -28,6 +28,7 @@ const LiveblockRoom: React.FC<LiveblockRoomProps> = ({ boardId, children }) => {
         id={boardId}
         initialPresence={{
           cursor: null,
+          selectoin: [],
         }}
         initialStorage={{
           layers: new LiveMap<string, LiveObject<Layer>>(),

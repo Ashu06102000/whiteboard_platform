@@ -1,5 +1,11 @@
 import { Id } from "@/convex/_generated/dataModel";
-import { CanvasState } from "@/types/canvas";
+import {
+  CanvasState,
+  EllipseLayer,
+  RectangleLayer,
+  Side,
+  XTWH,
+} from "@/types/canvas";
 import { LucideIcon } from "lucide-react";
 
 export interface ChildrenProp {
@@ -65,4 +71,26 @@ export interface ToolBarProps {
 }
 export interface CursorProps {
   connectionId: number;
+}
+
+export interface LayerPreviewProps {
+  id: string;
+  onLayerPointerDown: (e: React.PointerEvent, layerId: string) => void;
+  selectionColor?: string;
+}
+export interface RectangleProps {
+  id: string;
+  layer: RectangleLayer;
+  onPointerDown: (e: React.PointerEvent, id: string) => void;
+  selectionColor?: string;
+}
+
+export interface EllipseProps {
+  id: string;
+  layer: EllipseLayer;
+  onPointerDown: (e: React.PointerEvent, id: string) => void;
+  selectionColor?: string;
+}
+export interface SelectionBoxProps {
+  onResizeHandlePointerDown: (cornor: Side, initialBounds: XTWH) => void;
 }

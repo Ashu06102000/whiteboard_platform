@@ -12,7 +12,7 @@ const Toolbutton = ({
   isDisabled,
 }: ToolButtonProps) => {
   return (
-    <Hint label={label} side="top" sideOffset={14}>
+    <Hint label={label} side="right" sideOffset={14}>
       <Button
         disabled={isDisabled}
         onClick={onclick}
