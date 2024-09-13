@@ -13,7 +13,6 @@ const Info = ({ boardId }: { boardId: Id<"boards"> }) => {
         IdeaCanvas
       </h3>
       <Separator orientation="vertical" />
-
       <div>
         <span>{boardData?.title}</span>
       </div>

@@ -40,7 +40,6 @@ const AvatarComponent = ({
   const textColor = isColorDark(randomColor) ? "#fff" : "#000";
 
   useEffect(() => {
-    // Generate a new random color when userInfo changes (if needed)
     setRandomColor(getRandomColor());
   }, [userInfo]);
 

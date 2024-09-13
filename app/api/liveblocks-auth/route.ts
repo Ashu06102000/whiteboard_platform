@@ -39,7 +39,7 @@ export async function POST(request: Request) {
   const { status, body } = await session.authorize();
   return new Response(body, { status });
   const getroom = await liveblocks.getRoom(boardId as string);
-  console.log(getroom, "getroom");
+
   const createRoom = await liveblocks.createRoom(boardId as string, {
     defaultAccesses: ["room:write"],
   });

@@ -95,7 +95,6 @@ export const addFavoriteBoard = mutation({
     orgId: v.string(),
   },
   handler: async (ctx: any, args: any) => {
-    console.log("hi");
     const userIdentity = await ctx.auth.getUserIdentity();
     if (!userIdentity) {
       throw new Error("Unauthorized");
@@ -107,7 +106,7 @@ export const addFavoriteBoard = mutation({
     }
 
     const userId = userIdentity.subject;
-    console.log(userId, "iff");
+
     const existFavorites = await ctx.db
       .query("userFavorites")
       .withIndex("by_user_board_org", (q: any) =>
@@ -116,7 +115,7 @@ export const addFavoriteBoard = mutation({
       .unique();
 
     console.log(existFavorites, "existFavorites");
-    console.log("hello");
+
     if (existFavorites) {
       throw new Error("Favorites not found");
     }

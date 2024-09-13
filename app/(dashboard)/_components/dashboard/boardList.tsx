@@ -23,7 +23,7 @@ const BoardsList = ({
     orgId: org_id,
     ...query,
   });
-  console.log(query, "boardsData");
+
   if (!boardsData?.length && query.search) {
     return <EmptySearch />;
   }

@@ -7,7 +7,7 @@ import AvatarComponent from "./avatar";
 const Particeipents = ({ boardId }: { boardId: string }) => {
   const currentUser = useSelf((me) => me.info);
   const otherUsers = useOthers();
-  console.log(otherUsers, "otjer");
+
   return (
     <div className="absolute h-12 top-2 right-2 bg-white p-3 rounded-md flex items-center shadow-md gap-2">
       <AvatarComponent isCurrentUser userInfo={currentUser} />

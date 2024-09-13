@@ -91,7 +91,6 @@ const OrganizationBoardsList = ({
     );
   };
   const handleDelete = (boardId: string) => {
-    console.log(boardId, "is");
     toast.promise(
       deleteBoard({ id: boardId }).then((res) => {
         return { name: "Board" };
@@ -109,7 +108,6 @@ const OrganizationBoardsList = ({
   const handleFavoriteAdd = (boardId: string) => {
     toast.promise(
       addFavorites({ id: boardId, orgId: org_id }).then((res) => {
-        console.log(res, "res");
         return { name: "Board" };
       }),
       {
@@ -139,7 +137,7 @@ const OrganizationBoardsList = ({
   const copyToClipboard = (e: any) => {
     e.preventDefault();
     const currentUrl = window.location.origin + `/board/${boardId}`;
-    console.log(currentUrl);
+
     navigator.clipboard
       .writeText(currentUrl)
       .then(() => {
