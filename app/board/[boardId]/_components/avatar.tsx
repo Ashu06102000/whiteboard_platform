@@ -25,8 +25,10 @@ const isColorDark = (color: string) => {
 
 const AvatarComponent = ({
   userInfo,
+  isCurrentUser,
 }: {
   userInfo: participatantsAvatarProps | undefined;
+  isCurrentUser?: boolean;
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [randomColor, setRandomColor] = useState<string>(() =>

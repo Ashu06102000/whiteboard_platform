@@ -10,7 +10,7 @@ const Particeipents = ({ boardId }: { boardId: string }) => {
   console.log(otherUsers, "otjer");
   return (
     <div className="absolute h-12 top-2 right-2 bg-white p-3 rounded-md flex items-center shadow-md gap-2">
-      <AvatarComponent userInfo={currentUser} />
+      <AvatarComponent isCurrentUser userInfo={currentUser} />
       {otherUsers.map((otherUsers) => {
         return (
           <AvatarComponent key={otherUsers.id} userInfo={otherUsers.info} />
