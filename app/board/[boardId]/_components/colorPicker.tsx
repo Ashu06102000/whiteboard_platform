@@ -17,6 +17,7 @@ export default function ColorPicker({ onChange }: Props) {
       <ColorButton color={{ r: 252, g: 142, b: 42 }} onClick={onChange} />
       <ColorButton color={{ r: 82, g: 82, b: 82 }} onClick={onChange} />
       <ColorButton color={{ r: 255, g: 255, b: 255 }} onClick={onChange} />
+      <ColorButton color={{ r: 255, g: 249, b: 178 }} onClick={onChange} />
     </div>
   );
 }
@@ -34,7 +35,7 @@ function ColorButton({
       onClick={() => onClick(color)}
     >
       <div
-        className="w-5 h-5 rounded-full border border-black/10"
+        className="w-5 h-5 rounded-sm border border-black/10"
         style={{ background: colorToCss(color) }}
       />
     </button>

@@ -30,7 +30,6 @@ const SelectionBox = memo(
         <rect
           style={{
             transform: `translate(${bounds.x}px, ${bounds.y}px)`,
-            fill: "white",
             stroke: "#0044ff",
             strokeWidth: "1px",
           }}
