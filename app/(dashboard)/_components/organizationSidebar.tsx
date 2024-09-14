@@ -91,7 +91,7 @@ const OrganizationSidebar = () => {
         >
           <Link href={"/"} className=" font-normal">
             <LayoutDashboard size={16} />
-            This Team's Boards
+            This Team&apos;s Boards
           </Link>
         </Button>
         <Button

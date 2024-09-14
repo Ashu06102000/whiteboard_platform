@@ -121,11 +121,12 @@ const Toolbar = ({
   );
 };
 export default Toolbar;
+Toolbar.displayName = "Toolbar";
 
-Toolbar.Skelton = function () {
-  return (
-    <div className="absolute top-2/4 -translate-y-1/2 left-2 flex flex-col gap-y-4 bg-white h-96 w-14 shadow-md rounded-md">
-      <Skeleton className="h-full w-full bg-muted-400" />
-    </div>
-  );
-};
+// Toolbar.Skelton = function () {
+//   return (
+//     <div className="absolute top-2/4 -translate-y-1/2 left-2 flex flex-col gap-y-4 bg-white h-96 w-14 shadow-md rounded-md">
+//       <Skeleton className="h-full w-full bg-muted-400" />
+//     </div>
+//   );
+// };

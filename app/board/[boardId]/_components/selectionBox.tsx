@@ -209,3 +209,4 @@ const SelectionBox = memo(
 );
 
 export default SelectionBox;
+SelectionBox.displayName = "SelectionBox";
