@@ -10,21 +10,28 @@ const convex = new ConvexHttpClient(
   process.env.NEXT_PUBLIC_CONVEX_URL as string
 );
 
-export async function POST(request: Request) {
+export async function POST(request: Request): Promise<Response> {
   const user = await currentUser();
-  const authrization = await auth();
+  const authorization = await auth(); // Fixed typo: 'authrization' to 'authorization'
+
   if (!user) {
-    return new Response("np user");
+    return new Response("No user found", { status: 401 }); // Changed status to 401 for no user
   }
-  if (!authrization && !user) {
+
+  if (!authorization || !user) {
     return new Response("Unauthorized", { status: 403 });
   }
 
   const { room } = await request.json();
   const board = await convex.query(api.queries.boards.boards, { id: room });
-  const boardId = board?._id;
-  if (board?.orgId !== authrization.orgId) {
-    return new Response("Unauthorized");
+
+  if (!board) {
+    return new Response("Board not found", { status: 404 });
+  }
+
+  const boardId = board._id;
+  if (board.orgId !== authorization.orgId) {
+    return new Response("Unauthorized", { status: 403 });
   }
 
   const userInfo = {
@@ -33,16 +40,26 @@ export async function POST(request: Request) {
   };
 
   const session = liveblocks.prepareSession(user.id, { userInfo });
+
   if (room) {
     session.allow(room, session.FULL_ACCESS);
   }
+
   const { status, body } = await session.authorize();
-  return new Response(body, { status });
+
+  if (status !== 200) {
+    return new Response(body, { status });
+  }
+
   const getroom = await liveblocks.getRoom(boardId as string);
 
-  const createRoom = await liveblocks.createRoom(boardId as string, {
-    defaultAccesses: ["room:write"],
-  });
+  if (!getroom) {
+    const createRoom = await liveblocks.createRoom(boardId as string, {
+      defaultAccesses: ["room:write"],
+    });
 
-  return createRoom;
+    return new Response(JSON.stringify(createRoom), { status: 200 });
+  }
+
+  return new Response("Room already exists", { status: 200 });
 }
