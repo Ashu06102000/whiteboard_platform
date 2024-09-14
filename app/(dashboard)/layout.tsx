@@ -11,7 +11,7 @@ const DashboardLayout = ({ children }: ChildrenProp) => {
           <div className="flex gap-x-3 h-full">
             <Sidebar />
             <OrganizationSidebar />
-            <div className="h-full flex-1">
+            <div className="h-full flex-1 bg-white rounded-l-3xl">
               <Navbar />
 
               {children}

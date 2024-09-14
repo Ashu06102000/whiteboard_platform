@@ -26,6 +26,7 @@ import {
 import { CursorPresence } from "./cursorsPresence";
 import {
   connectionIdColors,
+  findIntersectingLayersWithRectangle,
   PointerEventToCanvasPoint,
   resizeBounds,
 } from "@/lib/utils";
@@ -34,6 +35,7 @@ import { LiveObject } from "@liveblocks/client";
 import LayerPreview from "./layerPreview";
 import SelectionBox from "./selectionBox";
 import SelectionTools from "./selectionTools";
+import React from "react";
 
 const Canvas = ({ boardId }: Canvasprops) => {
   const MAX_LAYERS = 100;
@@ -167,11 +169,44 @@ const Canvas = ({ boardId }: Canvasprops) => {
     },
     [canvasState]
   );
+  const startMultiSelection = useCallback((current: Point, origin: Point) => {
+    if (Math.abs(current.x - origin.x) + Math.abs(current.y - origin.y) > 5) {
+      console.log(current, "origin.x", origin.x, origin.y);
+      setCanvasState({
+        mode: CanvasMode.SelectionNet,
+        origin,
+        current,
+      });
+    }
+  }, []);
+  const updateSelectionNet = useMutation(
+    ({ storage, setMyPresence }, current: Point, origin: Point) => {
+      const layers = storage.get("layers").toImmutable();
+      setCanvasState({
+        mode: CanvasMode.SelectionNet,
+        origin: origin,
+        current,
+      });
+      const ids = findIntersectingLayersWithRectangle(
+        layerIds,
+        layers,
+        origin,
+        current
+      );
+      setMyPresence({ selection: ids });
+    },
+    [layerIds]
+  );
   const onPointerMove = useMutation(
     ({ setMyPresence }, e: React.PointerEvent) => {
       e.preventDefault();
       const current = PointerEventToCanvasPoint(e, camera);
-      if (canvasState.mode === CanvasMode.Resizing) {
+      if (canvasState.mode === CanvasMode.Pressing) {
+        startMultiSelection(current, canvasState.origin);
+      }
+      if (canvasState.mode === CanvasMode.SelectionNet) {
+        updateSelectionNet(current, canvasState.origin);
+      } else if (canvasState.mode === CanvasMode.Resizing) {
         resizeSelectedLayer(current);
       } else if (canvasState.mode === CanvasMode.Translating) {
         translateSelectedLayers(current);
@@ -209,6 +244,24 @@ const Canvas = ({ boardId }: Canvasprops) => {
       history.resume();
     },
     [camera, canvasState, history, insertLayer, unselectLayers]
+  );
+
+  const onPointerDown = React.useCallback(
+    (e: React.PointerEvent) => {
+      const point = PointerEventToCanvasPoint(e, camera);
+
+      if (canvasState.mode === CanvasMode.Inserting) {
+        return;
+      }
+
+      if (canvasState.mode === CanvasMode.pencil) {
+        // startDrawing(point, e.pressure);
+        return;
+      }
+
+      setCanvasState({ origin: point, mode: CanvasMode.Pressing });
+    },
+    [camera, canvasState.mode, setCanvasState]
   );
   const onLayerPointerDown = useMutation(
     ({ self, setMyPresence }, e: React.PointerEvent, layerId: string) => {
@@ -265,6 +318,7 @@ const Canvas = ({ boardId }: Canvasprops) => {
         onPointerMove={onPointerMove}
         onPointerLeave={onPointerLeave}
         onPointerUp={onPointerUp}
+        onPointerDown={onPointerDown}
         className="h-[100vh] w-[100vw]"
       >
         <g
@@ -280,7 +334,18 @@ const Canvas = ({ boardId }: Canvasprops) => {
               selectionColor={layerIdsToColorSelection[layerId]}
             />
           ))}
+
           <SelectionBox onResizeHandlePointerDown={onResizeHandlePointerDown} />
+          {canvasState.mode === CanvasMode.SelectionNet &&
+            canvasState.current != null && (
+              <rect
+                className="fill-blue-500/5 stroke-blue-500 stroke-1"
+                x={Math.min(canvasState.origin.x, canvasState.current.x)}
+                y={Math.min(canvasState.origin.y, canvasState.current.y)}
+                width={Math.abs(canvasState.origin.x - canvasState.current.x)}
+                height={Math.abs(canvasState.origin.y - canvasState.current.y)}
+              />
+            )}
           <CursorPresence />
         </g>
       </svg>

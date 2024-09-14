@@ -123,12 +123,12 @@ const CreateBoardSection = ({ org_id }: { org_id: string }) => {
           </div>
           <div className="flex flex-col gap-2  cursor-pointer">
             <div className="bg-gray-200 w-[162px] h-[114px] rounded-xl cursor-pointer  flex items-center justify-center relative">
-              <Image
+              {/* <Image
                 src={"/placeholders/Brainwriting.png"}
                 alt="Brainwriting"
                 fill
                 className="object-contain p-2"
-              />
+              /> */}
             </div>
             <div className="text-xs">+ Brainwriting</div>
           </div>

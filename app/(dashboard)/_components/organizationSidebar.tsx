@@ -20,16 +20,16 @@ const OrganizationSidebar = () => {
   const recent = params.get("recent");
 
   return (
-    <div className="hidden lg:flex flex-col h-screen spacr-y-6 max-w-[200px] w-full p-2 pt-5 gap-6 ">
+    <div className="hidden lg:flex flex-col h-screen spacr-y-6 max-w-72 w-full p-2 pt-5 gap-6 ">
       <Link href={"/"} className="flex items-start gap-2">
         <div className="flex flex-col gap-1">
           <h1
             className={cn(
-              "font-semibold text-4xl text--black leading-none",
+              "font-semibold text-4xl text-primary leading-none",
               font.className
             )}
           >
-            IC
+            IdeaCanvas
           </h1>
         </div>
       </Link>

@@ -16,7 +16,7 @@ const Rectangle = ({
       onPointerDown={(e) => onPointerDown(e, id)}
       style={{
         transform: `translate(${x}px, ${y}px)`,
-        boxShadow: `rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;`,
+        boxShadow: `rgba(100, 100, 111, 0.2) 0px 7px 29px 0px`,
       }}
       x={0}
       y={0}

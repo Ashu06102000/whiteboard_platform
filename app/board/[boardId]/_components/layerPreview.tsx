@@ -6,7 +6,8 @@ import { LayerType } from "@/types/canvas";
 import { memo } from "react";
 import Rectangle from "./reactangle";
 import Ellipse from "./ellipse";
-
+import { Text } from "./text";
+import { Note } from "./note";
 const LayerPreview = memo(
   ({ id, onLayerPointerDown, selectionColor }: LayerPreviewProps) => {
     const layer = useStorage((root) => root.layers.get(id));
@@ -14,6 +15,24 @@ const LayerPreview = memo(
       return null;
     }
     switch (layer.type) {
+      case LayerType.Text:
+        return (
+          <Text
+            id={id}
+            layer={layer}
+            onPointerDown={onLayerPointerDown}
+            selectionColor={selectionColor}
+          />
+        );
+      case LayerType.Note:
+        return (
+          <Note
+            id={id}
+            layer={layer}
+            onPointerDown={onLayerPointerDown}
+            selectionColor={selectionColor}
+          />
+        );
       case LayerType.Ellipse:
         return (
           <Ellipse
