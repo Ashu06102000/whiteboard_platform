@@ -8,6 +8,8 @@ import Rectangle from "./reactangle";
 import Ellipse from "./ellipse";
 import { Text } from "./text";
 import { Note } from "./note";
+import Path from "./path";
+import { colorToCss } from "@/lib/utils";
 const LayerPreview = memo(
   ({ id, onLayerPointerDown, selectionColor }: LayerPreviewProps) => {
     const layer = useStorage((root) => root.layers.get(id));
@@ -15,6 +17,18 @@ const LayerPreview = memo(
       return null;
     }
     switch (layer.type) {
+      case LayerType.Path:
+        return (
+          <Path
+            key={id}
+            points={layer.points}
+            onPointerDown={(e) => onLayerPointerDown(e, id)}
+            x={layer.x}
+            y={layer.y}
+            fill={layer.fill ? colorToCss(layer.fill) : "#CCC"}
+            stroke={selectionColor}
+          />
+        );
       case LayerType.Text:
         return (
           <Text
