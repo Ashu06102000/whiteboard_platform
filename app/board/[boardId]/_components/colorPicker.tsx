@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { colorToCss } from "@/lib/utils";
 
 import { Color } from "@/types/canvas";
@@ -30,14 +31,14 @@ function ColorButton({
   color: Color;
 }) {
   return (
-    <button
-      className="w-7 h-7 flex items-center justify-center gap-2"
+    <Button
+      className="w-7 h-7 gap-2 border-none p-px bg-transparent  hover:bg-gray-100"
       onClick={() => onClick(color)}
     >
       <div
-        className="w-5 h-5 rounded-sm border border-black/10"
+        className="w-6 h-6 rounded-sm border border-black/10"
         style={{ background: colorToCss(color) }}
       />
-    </button>
+    </Button>
   );
 }

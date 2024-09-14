@@ -94,8 +94,8 @@ const Canvas = ({ boardId }: Canvasprops) => {
         type: layerType,
         x: position.x,
         y: position.y,
-        height: 100,
-        width: 100,
+        height: 150,
+        width: 150,
         fill: lastUsedColor,
       });
       liveLayerIds.push(layerId);
@@ -135,7 +135,8 @@ const Canvas = ({ boardId }: Canvasprops) => {
   }, []);
 
   const unselectLayers = useMutation(({ self, setMyPresence }) => {
-    if (self.presence.selection.length > 0) {
+    const selection = self.presence.selection || [];
+    if (selection.length > 0) {
       setMyPresence({ selection: [] }, { addToHistory: true });
     }
   }, []);

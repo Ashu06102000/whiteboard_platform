@@ -1,5 +1,3 @@
-import { Button } from "@/components/ui/button";
-
 type Props = {
   onClick: () => void;
   children: React.ReactNode;

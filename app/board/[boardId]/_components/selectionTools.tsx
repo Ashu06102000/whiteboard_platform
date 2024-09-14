@@ -8,6 +8,7 @@ import ColorPicker from "./colorPicker";
 import { useMutation, useSelf } from "@/liveblocks.config";
 import useDeleteLayers from "@/hooks/useDeleteLayers";
 import { BringToFront, SendToBack, Trash2 } from "lucide-react";
+import Hint from "@/components/hint";
 
 type SelectionToolsProps = {
   isAnimated: boolean;
@@ -96,10 +97,15 @@ function SelectionTools({
 
       <div className="flex gap-2">
         <IconButton onClick={moveToFront}>
-          <BringToFront size={18} />
+          <Hint label="move to front" side="bottom" sideOffset={14}>
+            <BringToFront size={18} />
+          </Hint>
         </IconButton>
+
         <IconButton onClick={moveToBack}>
-          <SendToBack size={18} />
+          <Hint label="send to back" side="bottom" sideOffset={14}>
+            <SendToBack size={18} />
+          </Hint>
         </IconButton>
         <div className="flex items-center pl-2 ml-2 border-l border-[#eee]">
           <IconButton onClick={deleteLayers}>
