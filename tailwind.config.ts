@@ -72,6 +72,10 @@ const config: Config = {
       textColor: {
         ICcolor: "#5c5fef",
       },
+      boxShadow: {
+        popup:
+          "0px 2px 4px rgba(0, 0, 0, 0.1), 0px 0px 0px 1px rgba(0, 0, 0, 0.05)", // Custom box shadow
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

@@ -33,6 +33,7 @@ import { nanoid } from "nanoid";
 import { LiveObject } from "@liveblocks/client";
 import LayerPreview from "./layerPreview";
 import SelectionBox from "./selectionBox";
+import SelectionTools from "./selectionTools";
 
 const Canvas = ({ boardId }: Canvasprops) => {
   const MAX_LAYERS = 100;
@@ -105,6 +106,7 @@ const Canvas = ({ boardId }: Canvasprops) => {
     },
     [lastUsedColor]
   );
+
   const resizeSelectedLayer = useMutation(
     ({ storage, self }, point: Point) => {
       if (canvasState.mode !== CanvasMode.Resizing) {
@@ -131,6 +133,13 @@ const Canvas = ({ boardId }: Canvasprops) => {
       y: camera.y - e.deltaY,
     }));
   }, []);
+
+  const unselectLayers = useMutation(({ self, setMyPresence }) => {
+    if (self.presence.selection.length > 0) {
+      setMyPresence({ selection: [] }, { addToHistory: true });
+    }
+  }, []);
+
   const translateSelectedLayers = useMutation(
     ({ storage, self }, point: Point) => {
       if (canvasState.mode !== CanvasMode.Translating) {
@@ -181,7 +190,15 @@ const Canvas = ({ boardId }: Canvasprops) => {
     ({}, e) => {
       const point = PointerEventToCanvasPoint(e, camera);
 
-      if (canvasState.mode === CanvasMode.Inserting) {
+      if (
+        canvasState.mode === CanvasMode.None ||
+        canvasState.mode === CanvasMode.Pressing
+      ) {
+        unselectLayers();
+        setCanvasState({
+          mode: CanvasMode.None,
+        });
+      } else if (canvasState.mode === CanvasMode.Inserting) {
         insertLayer(canvasState.layerType, point);
       } else {
         setCanvasState({
@@ -190,7 +207,7 @@ const Canvas = ({ boardId }: Canvasprops) => {
       }
       history.resume();
     },
-    [camera, canvasState, history, insertLayer]
+    [camera, canvasState, history, insertLayer, unselectLayers]
   );
   const onLayerPointerDown = useMutation(
     ({ self, setMyPresence }, e: React.PointerEvent, layerId: string) => {
@@ -234,7 +251,14 @@ const Canvas = ({ boardId }: Canvasprops) => {
         undo={history.undo}
         redo={history.redo}
       />
-
+      <SelectionTools
+        isAnimated={
+          canvasState.mode !== CanvasMode.Translating &&
+          canvasState.mode !== CanvasMode.Resizing
+        }
+        camera={camera}
+        setLastUsedColor={setLastUsedColor}
+      />
       <svg
         onWheel={onWheeel}
         onPointerMove={onPointerMove}

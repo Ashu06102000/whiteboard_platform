@@ -34,6 +34,7 @@ const SelectionBox = memo(
             stroke: "#0044ff",
             strokeWidth: "1px",
           }}
+          className="fill-transparent stroke-primary stroke-[1px] pointer-events-none"
           x={0}
           y={0}
           width={bounds.width}
@@ -44,6 +45,7 @@ const SelectionBox = memo(
             <rect
               x={0}
               y={0}
+              className="fill-white stroke-primary stroke-[1px]"
               style={{
                 cursor: "nwse-resize",
                 width: `${HANDLE_WIDTH}px`,
@@ -63,6 +65,7 @@ const SelectionBox = memo(
             <rect
               x={0}
               y={0}
+              className="fill-white stroke-primary stroke-[1px]"
               style={{
                 cursor: "ns-resize",
                 width: `${HANDLE_WIDTH}px`,
@@ -82,6 +85,7 @@ const SelectionBox = memo(
             <rect
               x={0}
               y={0}
+              className="fill-white stroke-primary stroke-[1px]"
               style={{
                 cursor: "nesw-resize",
                 width: `${HANDLE_WIDTH}px`,
@@ -101,6 +105,7 @@ const SelectionBox = memo(
             <rect
               x={0}
               y={0}
+              className="fill-white stroke-primary stroke-[1px]"
               style={{
                 cursor: "ew-resize",
                 width: `${HANDLE_WIDTH}px`,
@@ -120,6 +125,7 @@ const SelectionBox = memo(
             <rect
               x={0}
               y={0}
+              className="fill-white stroke-primary stroke-[1px]"
               style={{
                 cursor: "nwse-resize",
                 width: `${HANDLE_WIDTH}px`,
@@ -139,6 +145,7 @@ const SelectionBox = memo(
             <rect
               x={0}
               y={0}
+              className="fill-white stroke-primary stroke-[1px]"
               style={{
                 cursor: "ns-resize",
                 width: `${HANDLE_WIDTH}px`,
@@ -158,6 +165,7 @@ const SelectionBox = memo(
             <rect
               x={0}
               y={0}
+              className="fill-white stroke-primary stroke-[1px]"
               style={{
                 cursor: "nesw-resize",
                 width: `${HANDLE_WIDTH}px`,
@@ -177,6 +185,7 @@ const SelectionBox = memo(
             <rect
               x={0}
               y={0}
+              className="fill-white stroke-primary stroke-[1px]"
               style={{
                 cursor: "ew-resize",
                 width: `${HANDLE_WIDTH}px`,
