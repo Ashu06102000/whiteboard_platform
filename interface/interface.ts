@@ -39,7 +39,7 @@ export interface DashboardPageprops {
 
 export interface BoardIdPageProps {
   params: {
-    boardId: string;
+    boardId: Id<"boards">;
   };
 }
 

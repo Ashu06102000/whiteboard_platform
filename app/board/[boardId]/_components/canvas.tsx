@@ -157,7 +157,9 @@ const Canvas = ({ boardId }: Canvasprops) => {
       }
 
       const offset = {
+        //@ts-ignore
         x: point.x - canvasState.current?.x,
+        //@ts-ignore
         y: point.y - canvasState.current?.y,
       };
 
@@ -259,6 +261,7 @@ const Canvas = ({ boardId }: Canvasprops) => {
       e.preventDefault();
       const current = PointerEventToCanvasPoint(e, camera);
       if (canvasState.mode === CanvasMode.Pressing) {
+        //@ts-ignore
         startMultiSelection(current, canvasState.origin);
       }
       if (canvasState.mode === CanvasMode.SelectionNet) {
