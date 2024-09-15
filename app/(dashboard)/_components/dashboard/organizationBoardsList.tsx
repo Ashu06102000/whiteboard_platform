@@ -169,7 +169,7 @@ const OrganizationBoardsList = ({
           {boardsData?.map((data: any) => (
             <div
               key={data._id}
-              className="flex flex-col gap-0 cursor-pointer max-w-56 bg-gray-100 border border-gray-300 rounded-lg text-center"
+              className="flex flex-col gap-0 cursor-pointer max-w-72 bg-gray-100 border border-gray-300 rounded-lg text-center"
             >
               <div className="bg-[#f5f5f5] h-56  rounded-t-md cursor-pointer  border flex items-center justify-center relative transition-all duration-300 ease-in-out hover:brightness-75 ">
                 <Menubar className="absolute top-2 right-1 p-0 m-0 flex cursor-pointer max-w-10 bg-transparent border-none items-center justify-center focus:bg-transparent menu_btn_bg_focus_remove">
