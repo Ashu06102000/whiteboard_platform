@@ -15,7 +15,7 @@ const DashboardLayout = ({ children }: ChildrenProp) => {
             </div>
             {/* <Sidebar /> */}
 
-            <div className="h-full flex-1 bg-white rounded-3xl">
+            <div className="h-full flex-1 bg-mainBg rounded-3xl">
               {/* <Navbar /> */}
 
               {children}

@@ -100,7 +100,7 @@ body {
 }
 
 .dashboard_wrapper {
-  height: calc(100vh - 68px);
+  height: calc(100vh - 128px);
 }
 .menu_btn_bg_focus_remove button:focus {
   background-color: transparent;
@@ -114,5 +114,5 @@ body {
 }
 
 .custom_calc_height_dashboard_boards_section {
-  height: calc(100vh - 70px);
+  height: calc(100vh - 128px);
 }

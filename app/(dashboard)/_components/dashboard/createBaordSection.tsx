@@ -57,7 +57,7 @@ const CreateBoardSection = ({ org_id }: { org_id: string }) => {
   };
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 bg-white rounded-3xl">
       <h3 className="text-3xl font-Open_Sans">
         Create a new board
         <span className="text-gray-600"> in {organization?.name}</span>
@@ -121,17 +121,17 @@ const CreateBoardSection = ({ org_id }: { org_id: string }) => {
               </DialogContent>
             </Dialog>
           </div>
-          <div className="flex flex-col gap-2  cursor-pointer">
+          {/* <div className="flex flex-col gap-2  cursor-pointer">
             <div className="bg-gray-200 w-[162px] h-[114px] rounded-xl cursor-pointer  flex items-center justify-center relative">
-              {/* <Image
+              <Image
                 src={"/placeholders/Brainwriting.png"}
                 alt="Brainwriting"
                 fill
                 className="object-contain p-2"
-              /> */}
+              />
             </div>
             <div className="text-xs">+ Brainwriting</div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

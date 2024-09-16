@@ -14,9 +14,9 @@ const Dashboard = ({ searchParams }: DashboardPageprops) => {
       {!organization ? (
         <EmptyDashboardState />
       ) : (
-        <div className="flex flex-col gap-9 h-screen overflow-scroll custom_calc_height_dashboard_boards_section">
-          <CreateBoardSection org_id={organization.id} />
+        <div className="flex gap-9 h-screen justify-between overflow-scroll custom_calc_height_dashboard_boards_section">
           <BoardsList org_id={organization.id} query={searchParams} />
+          <CreateBoardSection org_id={organization.id} />
         </div>
       )}
     </div>

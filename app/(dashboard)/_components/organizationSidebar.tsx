@@ -61,10 +61,12 @@ const OrganizationSidebar = () => {
                 justifyContent: "space-between",
               },
               organizationPreviewMainIdentifier: {
-                fontSize: "0.8rem",
+                fontSize: "1.2rem",
               },
               organizationPreviewAvatarBox: {
                 color: "black",
+                height: "24px",
+                width: "24px",
               },
             },
           }}

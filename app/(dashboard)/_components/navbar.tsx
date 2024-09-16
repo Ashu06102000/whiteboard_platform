@@ -56,9 +56,16 @@ const Navbar = () => {
       <UserButton
         appearance={{
           elements: {
+            rootBox: {
+              height: "100%",
+              justifyContent: "flex-end",
+            },
             userButtonAvatarBox: {
               height: "100%",
               width: "100%",
+            },
+            userButtonBox: {
+              height: "100%",
             },
           },
         }}
