@@ -78,6 +78,7 @@ const config: Config = {
       },
       backgroundColor: {
         mainBg: "#f5f5f5",
+        ICcolor: "#f3633b",
       },
     },
   },

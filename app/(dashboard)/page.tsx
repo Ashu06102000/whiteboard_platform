@@ -10,7 +10,7 @@ const Dashboard = ({ searchParams }: DashboardPageprops) => {
   const { organization } = useOrganization();
 
   return (
-    <div className="p-4 dashboard_wrapper">
+    <div className="dashboard_wrapper">
       {!organization ? (
         <EmptyDashboardState />
       ) : (
