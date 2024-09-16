@@ -70,11 +70,14 @@ const config: Config = {
         Roboto: ["roboto", "sans-serif"],
       },
       textColor: {
-        ICcolor: "#5c5fef",
+        ICcolor: "#f3633b",
       },
       boxShadow: {
         popup:
           "0px 2px 4px rgba(0, 0, 0, 0.1), 0px 0px 0px 1px rgba(0, 0, 0, 0.05)", // Custom box shadow
+      },
+      backgroundColor: {
+        mainBg: "#f5f5f5",
       },
     },
   },

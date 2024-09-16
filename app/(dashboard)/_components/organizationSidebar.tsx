@@ -73,7 +73,7 @@ const OrganizationSidebar = () => {
       <div className="flex items-center gap-20 justify-between bg-white px-8 py-5 rounded-full">
         <div className="w-full flex gap-8">
           <Button
-            className={`p-0 w-full flex items-center gap-4 h-auto justify-start bg-transparent hover:bg-transparent  ${recent ? "text-blue-600" : "text-gray-600"}`}
+            className={`p-0 w-full flex items-center gap-4 h-auto justify-start bg-transparent hover:bg-transparent  ${recent ? "text-ICcolor" : "text-gray-600"}`}
             asChild
             size="lg"
           >
@@ -89,7 +89,7 @@ const OrganizationSidebar = () => {
             </Link>
           </Button>
           <Button
-            className={`p-0 w-full flex items-center gap-4 h-auto justify-start bg-transparent hover:bg-transparent  ${!favorites && !recent ? "text-blue-600" : "text-gray-600"}`}
+            className={`p-0 w-full flex items-center gap-4 h-auto justify-start bg-transparent hover:bg-transparent  ${!favorites && !recent ? "text-ICcolor" : "text-gray-600"}`}
             asChild
             size="lg"
           >
@@ -99,7 +99,7 @@ const OrganizationSidebar = () => {
             </Link>
           </Button>
           <Button
-            className={`p-0 w-full flex items-center gap-4 h-auto justify-start bg-transparent hover:bg-transparent    ${favorites ? "text-blue-600" : "text-gray-600"}`}
+            className={`p-0 w-full flex items-center gap-4 h-auto justify-start bg-transparent hover:bg-transparent    ${favorites ? "text-ICcolor" : "text-gray-600"}`}
             asChild
             size="lg"
           >

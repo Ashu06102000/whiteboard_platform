@@ -23,7 +23,7 @@ const SearchInput = () => {
       <Input
         value={value}
         placeholder="Search Boards"
-        className="focus-visible:shadow-md focus-visible:outline-none focus-visible:ring-blue-500 focus:border-transparent pl-10 w-full max-w-96"
+        className="focus-visible:shadow-md bg-mainBg rounded-full focus-visible:outline-none focus-visible:ring-blue-500 focus:border-transparent pl-10 w-full h-full"
         onChange={(e) => {
           setValue(e.target.value);
           handleSearch(e.target.value);

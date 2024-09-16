@@ -5,11 +5,11 @@ import Sidebar from "./_components/sidebar";
 
 const DashboardLayout = ({ children }: ChildrenProp) => {
   return (
-    <main className="h-full">
+    <main className="h-full p-5">
       <div className="flex">
         <div className="h-full flex-1">
           <div className="flex h-full gap-5 flex-col">
-            <div className="flex justify-between items-center">
+            <div className="flex gap-4 items-center h-16">
               <OrganizationSidebar />
               <Navbar />
             </div>

@@ -11,8 +11,8 @@ import InviteOrganization from "./inviteOrganization";
 const Navbar = () => {
   const { organization } = useOrganization();
   return (
-    <div className="flex items-center gap-x-4">
-      <div className="hidden lg:flex lg:flex-1">
+    <div className="flex items-center gap-4 w-full bg-white h-full rounded-full p-2">
+      <div className="hidden lg:flex lg:flex-1 h-full">
         <SearchInput />
       </div>
       <div className="block lg:hidden flex-1">
@@ -29,15 +29,14 @@ const Navbar = () => {
                 fontSize: "0.8 rem",
                 width: "100%",
                 borderWidth: "0.5px",
-                borderColor: "black",
-                borderRadius: "8px",
+                borderRadius: "999px",
                 maxWidth: "250px",
               },
               organizationSwitcherTrigger: {
                 padding: "8px 12px",
                 width: "100%",
                 cursor: "pointer",
-                borderRadius: "8px",
+                borderRadius: "999px",
                 backgroundColor: "slate-100",
                 transition: "background-color 0.3s ease",
                 justifyContent: "space-between",
@@ -54,7 +53,16 @@ const Navbar = () => {
       </div>
       {organization && <InviteOrganization />}
 
-      <UserButton />
+      <UserButton
+        appearance={{
+          elements: {
+            userButtonAvatarBox: {
+              height: "100%",
+              width: "100%",
+            },
+          },
+        }}
+      />
     </div>
   );
 };
