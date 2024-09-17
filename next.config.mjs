@@ -8,6 +8,14 @@ const nextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: "/api/clerk/:path*",
+        destination: "https://api.clerk.com/:path*", // Proxy to the Clerk API
+      },
+    ];
+  },
 };
 
 export default nextConfig;

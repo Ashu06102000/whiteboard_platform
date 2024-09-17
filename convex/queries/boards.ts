@@ -80,6 +80,13 @@ export const getBoardsById = query({
   },
 });
 
+export const getAllUsers = query({
+  handler: async (ctx: any) => {
+    const users = await ctx.db.query("users").collect();
+    return users;
+  },
+});
+
 export const boards = query({
   args: {
     id: v.id("boards"),

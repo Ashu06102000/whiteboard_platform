@@ -25,7 +25,6 @@ const Navbar = () => {
   const pathname = usePathname();
   const favorites = params.get("favorites");
   const recent = params.get("recent");
-  const teamBoards = params.get("team-boards");
 
   return (
     <div className="flex gap-5 max-h-16 justify-between w-full">
@@ -105,7 +104,7 @@ const Navbar = () => {
               </Link>
             </Button>
             <Button
-              className={`p-0 w-full flex items-center gap-4 h-auto justify-start bg-transparent hover:bg-transparent  ${teamBoards ? "text-ICcolor" : "text-gray-600"}`}
+              className={`p-0 w-full flex items-center gap-4 h-auto justify-start bg-transparent hover:bg-transparent  ${pathname === "/boards" ? "text-ICcolor" : "text-gray-600"}`}
               asChild
               size="lg"
             >
