@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
 import { Clock4, LayoutDashboard, Star } from "lucide-react";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
 const font = Roboto({
   subsets: ["latin"],
@@ -22,10 +22,13 @@ const font = Roboto({
 const Navbar = () => {
   const { organization } = useOrganization();
   const params = useSearchParams();
+  const pathname = usePathname();
   const favorites = params.get("favorites");
   const recent = params.get("recent");
+  const teamBoards = params.get("team-boards");
+
   return (
-    <div>
+    <div className="flex gap-5 max-h-16 justify-between w-full">
       <div className="hidden lg:flex  h-full w-full gap-4">
         <div className="flex justify-center items-center gap-4">
           <Link href={"/"} className="flex items-start gap-2">
@@ -76,11 +79,11 @@ const Navbar = () => {
         <div className="flex items-center gap-20 justify-between bg-white px-8 py-5 rounded-full">
           <div className="w-full flex gap-8">
             <Button
-              className={`p-0 w-full flex items-center gap-4 h-auto justify-start bg-transparent hover:bg-transparent  ${recent ? "text-ICcolor" : "text-gray-600"}`}
+              className={`p-0 w-full flex items-center gap-4 h-auto justify-start bg-transparent hover:bg-transparent  ${pathname === "/" ? "text-ICcolor" : "text-gray-600"}`}
               asChild
               size="lg"
             >
-              <Link className="font-normal text-[16px]" href={"/home"}>
+              <Link className="font-normal text-[16px]" href={"/"}>
                 <Clock4 size={18} />
                 Home
               </Link>
@@ -102,11 +105,11 @@ const Navbar = () => {
               </Link>
             </Button>
             <Button
-              className={`p-0 w-full flex items-center gap-4 h-auto justify-start bg-transparent hover:bg-transparent  ${!favorites && !recent ? "text-ICcolor" : "text-gray-600"}`}
+              className={`p-0 w-full flex items-center gap-4 h-auto justify-start bg-transparent hover:bg-transparent  ${teamBoards ? "text-ICcolor" : "text-gray-600"}`}
               asChild
               size="lg"
             >
-              <Link href={"/"} className=" text-[16px]">
+              <Link href={"/boards"} className=" text-[16px]">
                 <LayoutDashboard size={18} />
                 This Team&apos;s Boards
               </Link>
@@ -130,7 +133,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <div className="flex items-center gap-4 w-full bg-white h-full rounded-full p-2">
+      <div className="flex items-center gap-4 w-full bg-white rounded-full p-2">
         <div className="hidden lg:flex lg:flex-1 h-full">
           <SearchInput />
         </div>
