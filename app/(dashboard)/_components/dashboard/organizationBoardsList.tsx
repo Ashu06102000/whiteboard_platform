@@ -152,216 +152,210 @@ const OrganizationBoardsList = ({
   const favoriteParams = params.get("favorites");
 
   return (
-    <div className="">
-      <div className="flex flex-col gap-2">
-        {boardsData?.length > 0 && (
-          <h3 className="text-3xl font-Open_Sans sticky-container">
-            {favoriteParams
-              ? "Favorite boards in this team"
-              : "Boards in this team"}
-            <span>
-              <span className="text-gray-600"> - in {organization?.name}</span>
-            </span>
-          </h3>
-        )}
+    <div className="flex flex-col gap-2 flex-1">
+      {boardsData?.length > 0 && (
+        <h3 className="text-3xl font-Open_Sans sticky-container">
+          {favoriteParams
+            ? "Favorite boards in this team"
+            : "Boards in this team"}
+          <span>
+            <span className="text-gray-600"> - in {organization?.name}</span>
+          </span>
+        </h3>
+      )}
 
-        <div className="rounded-lg p-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-          {boardsData?.map((data: any) => (
-            <div
-              key={data._id}
-              className="flex flex-col gap-0 cursor-pointer max-w-72 bg-gray-100 border border-gray-300 rounded-lg text-center"
-            >
-              <div className="bg-[#f5f5f5] h-56  rounded-t-md cursor-pointer  border flex items-center justify-center relative transition-all duration-300 ease-in-out hover:brightness-75 ">
-                <Menubar className="absolute top-2 right-1 p-0 m-0 flex cursor-pointer max-w-10 bg-transparent border-none items-center justify-center focus:bg-transparent menu_btn_bg_focus_remove">
-                  <MenubarMenu>
-                    <MenubarTrigger>
-                      <EllipsisVertical
-                        className="focus:bg-transparent cursor-pointer z-10"
-                        color="black"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setBoardId(data._id);
-                        }}
-                      />
-                    </MenubarTrigger>
-                    <MenubarContent>
-                      <MenubarItem
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setBoardId(data._id);
-                          setEditDialogOpen(true);
-                        }}
-                        className="flex gap-2 "
-                      >
-                        <Pencil size={12} /> Edit
-                      </MenubarItem>
-                      <MenubarItem
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setBoardId(data._id);
-                          setdeleteDialogOpen(true);
-                        }}
-                        className="flex gap-2"
-                      >
-                        <Trash2 size={12} /> Delete
-                      </MenubarItem>
+      <div className="rounded-lg p-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+        {boardsData?.map((data: any) => (
+          <div
+            key={data._id}
+            className="flex flex-col gap-0 cursor-pointer max-w-72 bg-gray-100 border border-gray-300 rounded-lg text-center"
+          >
+            <div className="bg-[#f5f5f5] h-56  rounded-t-md cursor-pointer  border flex items-center justify-center relative transition-all duration-300 ease-in-out hover:brightness-75 ">
+              <Menubar className="absolute top-2 right-1 p-0 m-0 flex cursor-pointer max-w-10 bg-transparent border-none items-center justify-center focus:bg-transparent menu_btn_bg_focus_remove">
+                <MenubarMenu>
+                  <MenubarTrigger>
+                    <EllipsisVertical
+                      className="focus:bg-transparent cursor-pointer z-10"
+                      color="black"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setBoardId(data._id);
+                      }}
+                    />
+                  </MenubarTrigger>
+                  <MenubarContent>
+                    <MenubarItem
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setBoardId(data._id);
+                        setEditDialogOpen(true);
+                      }}
+                      className="flex gap-2 "
+                    >
+                      <Pencil size={12} /> Edit
+                    </MenubarItem>
+                    <MenubarItem
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setBoardId(data._id);
+                        setdeleteDialogOpen(true);
+                      }}
+                      className="flex gap-2"
+                    >
+                      <Trash2 size={12} /> Delete
+                    </MenubarItem>
 
-                      <MenubarSeparator />
-                      <MenubarItem
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setBoardId(data._id);
-                          setDetailsDialogOpen(true);
-                        }}
-                        className="flex gap-2"
-                      >
-                        <Info size={12} /> Board details
-                      </MenubarItem>
-                      <MenubarItem
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setBoardId(data._id);
-                          copyToClipboard(e);
-                        }}
-                        className="flex gap-2 cursor-pointer"
-                      >
-                        <Info size={12} /> Copy url
-                      </MenubarItem>
-                      <MenubarItem
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setBoardId(data._id);
-                          window.open(`/board/${data._id}`, "_blank");
-                        }}
-                        className="flex gap-2 cursor-pointer"
-                      >
-                        <SquareArrowOutUpRight size={12} /> Open in new tab
-                      </MenubarItem>
-                    </MenubarContent>
-                  </MenubarMenu>
-                </Menubar>
+                    <MenubarSeparator />
+                    <MenubarItem
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setBoardId(data._id);
+                        setDetailsDialogOpen(true);
+                      }}
+                      className="flex gap-2"
+                    >
+                      <Info size={12} /> Board details
+                    </MenubarItem>
+                    <MenubarItem
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setBoardId(data._id);
+                        copyToClipboard(e);
+                      }}
+                      className="flex gap-2 cursor-pointer"
+                    >
+                      <Info size={12} /> Copy url
+                    </MenubarItem>
+                    <MenubarItem
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setBoardId(data._id);
+                        window.open(`/board/${data._id}`, "_blank");
+                      }}
+                      className="flex gap-2 cursor-pointer"
+                    >
+                      <SquareArrowOutUpRight size={12} /> Open in new tab
+                    </MenubarItem>
+                  </MenubarContent>
+                </MenubarMenu>
+              </Menubar>
 
-                <Image
-                  onClick={() => router.push(`/board/${data._id}`)}
-                  src={data.imageUrl}
-                  fill
-                  className="object-contain p-9"
-                  alt="image"
+              <Image
+                onClick={() => router.push(`/board/${data._id}`)}
+                src={data.imageUrl}
+                fill
+                className="object-contain p-9"
+                alt="image"
+              />
+            </div>
+            <div className="text-sm font-light text-start px-2 bg-white py-2 rounded-b-md border-gray-100 border flex flex-col">
+              <div className="flex justify-between items-center">
+                <span> {data.title}</span>
+                <Star
+                  onClick={() => {
+                    setBoardId(data._id);
+                    data.isFavorite
+                      ? handleRemoveFavorite(data._id)
+                      : handleFavoriteAdd(data._id);
+                  }}
+                  fill={`${data.isFavorite ? "dodgerblue" : "transparent"}`}
+                  className={`${data.isFavorite ? "stroke-[dodgerblue]" : "stroke-gray-600"}`}
+                  size={16}
                 />
               </div>
-              <div className="text-sm font-light text-start px-2 bg-white py-2 rounded-b-md border-gray-100 border flex flex-col">
-                <div className="flex justify-between items-center">
-                  <span> {data.title}</span>
-                  <Star
-                    onClick={() => {
-                      setBoardId(data._id);
-                      data.isFavorite
-                        ? handleRemoveFavorite(data._id)
-                        : handleFavoriteAdd(data._id);
-                    }}
-                    fill={`${data.isFavorite ? "dodgerblue" : "transparent"}`}
-                    className={`${data.isFavorite ? "stroke-[dodgerblue]" : "stroke-gray-600"}`}
-                    size={16}
-                  />
-                </div>
-                <span className="text-xs font-extralight">
-                  Last updated:{" "}
-                  {format(new Date(data.updatedAt), "MMM do, yyyy")}
-                </span>
-              </div>
-              {data._id === boardId && (
-                <div>
-                  <Dialog
-                    open={editDialogOpen}
-                    onOpenChange={setEditDialogOpen}
-                  >
-                    <DialogContent className="sm:max-w-[600px]">
-                      <DialogHeader>
-                        <DialogTitle>Edit Board</DialogTitle>
-                        <DialogDescription>
-                          Fill all the fields to edit the board
-                        </DialogDescription>
-                      </DialogHeader>
-                      <div className="grid gap-4 py-4">
-                        <div className="flex flex-col items-start gap-4">
-                          <Label htmlFor="name" className="text-right">
-                            Board Name
-                          </Label>
-                          <Input
-                            id="name"
-                            defaultValue={data.title}
-                            className="col-span-3"
-                            onChange={(e) => setBoardName(e.target.value)}
-                          />
-                        </div>
-                        <div className="flex flex-col items-start gap-4">
-                          <Label htmlFor="image" className="text-right">
-                            Board image
-                          </Label>
-                          <Input
-                            id="image"
-                            type="file"
-                            className="col-span-3"
-                            accept=".svg, .png, .jpg, .jpeg"
-                            onChange={(e: any) => {
-                              const file = e?.target?.files[0];
-                              if (file) {
-                                setBoardImage(URL.createObjectURL(file));
-                              } else {
-                                alert(
-                                  "Please select a valid image file (SVG, PNG, JPG)"
-                                );
-                              }
-                            }}
-                          />
-                        </div>
-                      </div>
-                      <DialogFooter>
-                        <Button onClick={handleOnClick} type="submit">
-                          Update Board
-                        </Button>
-                      </DialogFooter>
-                    </DialogContent>
-                  </Dialog>
-                  <Dialog
-                    open={detailsDialogOpen}
-                    onOpenChange={setDetailsDialogOpen}
-                  >
-                    <DialogContent className="sm:max-w-[500px] gap-4">
-                      <BoardDetails id={boardId} />
-                      <DialogFooter>
-                        <Button onClick={() => setDetailsDialogOpen(false)}>
-                          Close
-                        </Button>
-                      </DialogFooter>
-                    </DialogContent>
-                  </Dialog>
-                  <Dialog
-                    open={deleteDialogOpen}
-                    onOpenChange={setdeleteDialogOpen}
-                  >
-                    <DialogContent className="sm:max-w-[500px] gap-4">
-                      <DialogTitle>
-                        Do you want to delete this board ?
-                      </DialogTitle>
-                      <DialogFooter>
-                        <Button
-                          onClick={() => handleDelete(boardId)}
-                          variant="destructive"
-                        >
-                          Delete
-                        </Button>
-                        <Button onClick={() => setdeleteDialogOpen(false)}>
-                          Close
-                        </Button>
-                      </DialogFooter>
-                    </DialogContent>
-                  </Dialog>
-                </div>
-              )}
+              <span className="text-xs font-extralight">
+                Last updated: {format(new Date(data.updatedAt), "MMM do, yyyy")}
+              </span>
             </div>
-          ))}
-        </div>
+            {data._id === boardId && (
+              <div>
+                <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
+                  <DialogContent className="sm:max-w-[600px]">
+                    <DialogHeader>
+                      <DialogTitle>Edit Board</DialogTitle>
+                      <DialogDescription>
+                        Fill all the fields to edit the board
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="grid gap-4 py-4">
+                      <div className="flex flex-col items-start gap-4">
+                        <Label htmlFor="name" className="text-right">
+                          Board Name
+                        </Label>
+                        <Input
+                          id="name"
+                          defaultValue={data.title}
+                          className="col-span-3"
+                          onChange={(e) => setBoardName(e.target.value)}
+                        />
+                      </div>
+                      <div className="flex flex-col items-start gap-4">
+                        <Label htmlFor="image" className="text-right">
+                          Board image
+                        </Label>
+                        <Input
+                          id="image"
+                          type="file"
+                          className="col-span-3"
+                          accept=".svg, .png, .jpg, .jpeg"
+                          onChange={(e: any) => {
+                            const file = e?.target?.files[0];
+                            if (file) {
+                              setBoardImage(URL.createObjectURL(file));
+                            } else {
+                              alert(
+                                "Please select a valid image file (SVG, PNG, JPG)"
+                              );
+                            }
+                          }}
+                        />
+                      </div>
+                    </div>
+                    <DialogFooter>
+                      <Button onClick={handleOnClick} type="submit">
+                        Update Board
+                      </Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+                <Dialog
+                  open={detailsDialogOpen}
+                  onOpenChange={setDetailsDialogOpen}
+                >
+                  <DialogContent className="sm:max-w-[500px] gap-4">
+                    <BoardDetails id={boardId} />
+                    <DialogFooter>
+                      <Button onClick={() => setDetailsDialogOpen(false)}>
+                        Close
+                      </Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+                <Dialog
+                  open={deleteDialogOpen}
+                  onOpenChange={setdeleteDialogOpen}
+                >
+                  <DialogContent className="sm:max-w-[500px] gap-4">
+                    <DialogTitle>
+                      Do you want to delete this board ?
+                    </DialogTitle>
+                    <DialogFooter>
+                      <Button
+                        onClick={() => handleDelete(boardId)}
+                        variant="destructive"
+                      >
+                        Delete
+                      </Button>
+                      <Button onClick={() => setdeleteDialogOpen(false)}>
+                        Close
+                      </Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+              </div>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );

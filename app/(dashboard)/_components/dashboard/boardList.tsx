@@ -32,7 +32,7 @@ const BoardsList = ({
   }
 
   return (
-    <div>
+    <div className="flex flex-1">
       <OrganizationBoardsList org_id={org_id} boardsData={boardsData} />
     </div>
   );
