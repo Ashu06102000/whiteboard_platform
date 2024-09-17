@@ -2,11 +2,13 @@
 import { useOrganization } from "@clerk/nextjs";
 import CreateBoardSection from "../boards/_components/dashboard/createBaordSection";
 import EmptyDashboardState from "../boards/_components/dashboard/emptyDashboardState";
+import Navbar from "../boards/_components/navbar";
 
 const Home = () => {
   const { organization } = useOrganization();
   return (
-    <div>
+    <div className="flex flex-col gap-5 p-5">
+      <Navbar />
       {!organization ? (
         <EmptyDashboardState />
       ) : (

@@ -12,7 +12,7 @@ import { Roboto } from "next/font/google";
 import { cn } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
-import { Clock4, LayoutDashboard, Star } from "lucide-react";
+import { Clock4, Home, LayoutDashboard, Star } from "lucide-react";
 import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
 const font = Roboto({
@@ -84,7 +84,7 @@ const Navbar = () => {
               size="lg"
             >
               <Link className="font-normal text-[16px]" href={"/"}>
-                <Clock4 size={18} />
+                <Home size={18} />
                 Home
               </Link>
             </Button>

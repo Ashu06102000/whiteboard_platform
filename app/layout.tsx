@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ConvexClientProvider } from "@/provider/convex-client-provider";
 import { Toaster } from "@/components/ui/sonner";
-import Navbar from "./boards/_components/navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,10 +25,7 @@ export default function RootLayout({
               backgroundColor: "white",
             }}
           />
-          <div className="flex flex-col gap-5 p-5">
-            <Navbar />
-            {children}
-          </div>
+          {children}
         </ConvexClientProvider>
       </body>
     </html>
